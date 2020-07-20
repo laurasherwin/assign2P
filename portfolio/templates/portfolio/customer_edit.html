@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eagle Financial</title>
+</head>
+<body>
+
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>Edit Customer</h1>
+    <form method="POST" class="customer-form">{% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="save btn btn-default">Update</button>
+    </form>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eagle Financial</title>
+</head>
+<body>
+{% block body_block %}
+    <h1>Delete {{ stock.customer, stock.symbol }}?</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete">
+        <a href="{% url 'portfolio:home' pk=stock.customer, stock.symbol %} ">Cancel</a>
+    </form>
+{% endblock %}
+
+</body>
+</html>
