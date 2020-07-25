@@ -1,7 +1,10 @@
+import requests
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from urllib import request
+from decimal import Decimal
+#from urllib import request
+import alpha_vantage
 
 # Create your models here.
 class Customer(models.Model):
@@ -69,3 +72,20 @@ class Stock(models.Model):
     def initial_stock_value(self):
         return self.shares * self.purchase_price
 
+    def current_stock_price(self):
+        symbol_f = str(self.symbol)
+        main_api = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol='
+        api_key = '&interval=1min&apikey= LO655PKVMTBWQVZ2'
+        url = main_api + symbol_f + api_key
+        json_data = requests.get(url).json()
+#        print(json_data)
+# This worked in postman
+# https: // www.alphavantage.co / query?function = GLOBAL_QUOTE & symbol = goog & apikey = LO655PKVMTBWQVZ2 & datatype = json & interval = 1
+#        min
+        open_price = float(json_data["Global Quote"]["02. open"])
+        share_value = open_price
+        return share_value
+
+    def current_stock_value(self):
+#        return float(self.current_stock_price()) * float(self.shares)
+        return round((Decimal(self.current_stock_price()) * Decimal(self.shares)), 3)

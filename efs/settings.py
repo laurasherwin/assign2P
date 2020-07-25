@@ -26,7 +26,7 @@ SECRET_KEY = '4z42+#a2nr!vl8pu9c5ww)dirl=yafe3f)^3pzs)q$2#y8sx-a'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+#ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'portfolio',
     'crispy_forms',
+    'rest_framework',
+    'mathfilters',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
